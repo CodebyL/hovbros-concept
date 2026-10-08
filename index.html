@@ -89,7 +89,7 @@ nav.main button:hover{color:var(--gold)}
 .hero .g{display:grid;gap:2.6rem;position:relative}
 @media(min-width:960px){.hero .g{grid-template-columns:1.15fr .85fr;align-items:center;gap:4rem}}
 .hero h1{font-size:clamp(2.8rem,8vw,5.8rem);letter-spacing:-.04em}
-.hero h1 .g2{background:linear-gradient(100deg,var(--gold2),var(--gold) 60%,#b98e36);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 .g2{color:var(--gold2)}
 .hero p{color:var(--soft);font-size:1.12rem;max-width:46ch;margin:1.3rem 0 2rem}
 .cta{display:flex;flex-wrap:wrap;gap:.8rem}
 .photo{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:1;box-shadow:0 40px 80px -40px #000;border:1px solid var(--line)}
@@ -97,6 +97,7 @@ nav.main button:hover{color:var(--gold)}
 .photo .tag{position:absolute;left:1rem;bottom:1rem;right:1rem;display:flex;align-items:center;gap:.8rem;background:rgba(13,22,37,.82);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;padding:.8rem 1rem;font-size:.9rem}
 .photo .tag b{color:var(--gold2)}
 .drops{position:absolute;inset:0;pointer-events:none}
+@media(max-width:860px){.drops{display:none}}
 .drops i{position:absolute;top:-10px;width:2px;height:38px;border-radius:2px;background:linear-gradient(transparent,var(--wash));opacity:.55;animation:rain linear infinite}
 @keyframes rain{to{transform:translateY(120vh)}}
 /* awards */
@@ -125,8 +126,8 @@ nav.main button:hover{color:var(--gold)}
 .wash{position:relative;height:clamp(240px,40vw,420px);overflow:hidden;display:grid;place-items:center;background:var(--navy2);border-block:1px solid var(--line)}
 .wash .w{font:800 clamp(5rem,22vw,16rem)/.85 var(--sans);letter-spacing:-.06em;position:relative}
 .wash .dirty,.wash .clean{display:block}
-.wash .dirty{color:#6b6450;filter:saturate(.6);background:repeating-linear-gradient(115deg,#5a5444 0 6px,#4b4637 6px 12px);-webkit-background-clip:text;background-clip:text;color:transparent}
-.wash .clean{position:absolute;inset:0;background:linear-gradient(100deg,#fff,var(--gold2) 50%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;clip-path:inset(0 100% 0 0)}
+.wash .dirty{color:#5a5444}
+.wash .clean{position:absolute;inset:0;color:#fff;clip-path:inset(0 100% 0 0)}
 .wash .jet{position:absolute;top:0;bottom:0;width:3px;left:0;background:linear-gradient(transparent,var(--wash),transparent);box-shadow:0 0 30px 8px rgba(127,211,255,.4);opacity:0}
 .wash p{position:absolute;bottom:1rem;left:0;right:0;text-align:center;color:var(--soft);font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;margin:0}
 /* work */
@@ -165,7 +166,6 @@ footer .dis{border-top:1px solid var(--line);margin-top:1rem;padding-top:1rem;fo
  <div class="drops" aria-hidden="true" id="drops"></div>
  <div class="wrap g">
   <div>
-   <span class="k rv">South Shore &middot; Nassau County</span>
    <h1 class="rv" style="--d:1;margin-top:1rem">No job too big.<br><span class="g2">No job too small.</span></h1>
    <p class="rv" style="--d:2">Family-owned pressure washing for houses, roofs, driveways and decks, from the Hov brothers in Seaford. Licensed and insured.</p>
    <div class="cta rv" style="--d:3"><button class="btn" type="button" data-go="book">Book a wash date</button><button class="btn ghost" type="button" data-go="work">See recent work</button></div>
