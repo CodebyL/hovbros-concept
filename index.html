@@ -50,8 +50,14 @@ dialog.lbx .lbb button{min-width:54px;min-height:48px;border-radius:10px;border:
 .bk .err{color:#c0392b;font-size:.82rem;font-weight:600}
 /* admin demo */
 .adm{display:grid;gap:1rem}
-.adm .pick{display:flex;gap:.5rem;flex-wrap:wrap}
-.adm .pick button{width:74px;height:74px;border-radius:10px;overflow:hidden;padding:0;border:3px solid transparent;cursor:pointer;background:none}
+.adm .pick{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.6rem}
+@media(max-width:400px){.adm .pick{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.adm .pick button,.adm .pick .up{width:100%;height:auto;aspect-ratio:1;border-radius:12px;overflow:hidden;padding:0;border:3px solid transparent;cursor:pointer;background:none}
+.adm .pick .up{position:relative;display:grid;place-content:center;justify-items:center;gap:.3rem;border:2px dashed var(--adm-line,#bbb);background:var(--adm-bg,#fff);color:inherit;font-size:.8rem;font-weight:700;text-align:center;transition:border-color .2s,background .2s}
+.adm .pick .up:hover{border-color:var(--adm-acc,#000)}
+.adm .pick .up:focus-within{outline:3px solid var(--adm-acc,#000);outline-offset:2px}
+.adm .pick .up svg{width:26px;height:26px}
+.adm .pick .up input{position:absolute;inset:0;opacity:0;cursor:pointer;min-height:0;width:100%;height:100%;padding:0;border:0}
 .adm .pick button img{width:100%;height:100%;object-fit:cover}
 .adm .pick button[aria-pressed=true]{border-color:var(--adm-acc,#000)}
 .adm label{display:grid;gap:.35rem;font-size:.9rem;font-weight:600}
@@ -139,15 +145,95 @@ nav.main button:hover{color:var(--gold)}
 .wk button:hover img{transform:scale(1.06)}
 .wk figcaption{font-size:.88rem;color:var(--soft);padding:.6rem .2rem 0}
 .wk figcaption b{color:var(--ink)}
-/* book */
-.book .g{display:grid;gap:2.4rem}
-@media(min-width:960px){.book .g{grid-template-columns:.85fr 1.15fr;gap:4rem}}
-.card{background:#fff;color:#0d1625;border-radius:26px;padding:clamp(1.3rem,3vw,2.2rem);box-shadow:0 40px 80px -40px #000}
-.card .btn.ghost{color:#0d1625;box-shadow:inset 0 0 0 1.5px #c9d1de}
-.addon{display:inline-flex;margin-top:1.2rem;border:1px solid var(--gold);color:var(--gold2);border-radius:999px;padding:.35rem .9rem;font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-.ct{margin-top:2rem;display:grid;gap:.4rem}
-.ct a{color:var(--ink);font:700 1.6rem var(--sans);text-decoration:none;display:inline-flex;min-height:44px;align-items:center}
-.ct small{color:var(--soft)}
+/* booking (light) */
+.bw{background:#f2f7fb;color:#0d1625;--b-line:#d4dee9;--b-soft:#55627a;--b-sky:#2f8fcf;--b-ink:#0d1625}
+.bw .top{display:grid;gap:1.4rem;margin-bottom:2.4rem}
+@media(min-width:960px){.bw .top{grid-template-columns:1.1fr .9fr;align-items:end;gap:3rem}}
+.bw .k{color:#9a7424}
+.bw h2{font-size:clamp(2.2rem,5vw,3.6rem);margin-top:.8rem;color:#0d1625}
+.bw .top p{margin:0;color:var(--b-soft);max-width:46ch}
+.bw .top .call{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;align-items:center;margin-top:1rem;font-size:.92rem;color:var(--b-soft)}
+.bw .top .call a{color:#0d1625;font-weight:800;font-size:1.25rem;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.bwg{display:grid;gap:1.2rem;align-items:stretch}
+@media(min-width:980px){.bwg{grid-template-columns:1.35fr .65fr;gap:1.4rem}}
+.pane{background:#fff;border:1px solid var(--b-line);border-radius:24px;padding:clamp(1.2rem,2.6vw,2rem);display:flex;flex-direction:column;min-height:620px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin-bottom:1.4rem;counter-reset:st}
+.tabs button{min-height:48px;border:0;border-bottom:3px solid var(--b-line);background:none;text-align:left;padding:0 .2rem;font-weight:700;font-size:.9rem;color:var(--b-soft);cursor:pointer;display:flex;align-items:center;gap:.5rem}
+.tabs button::before{counter-increment:st;content:counter(st);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#eef3f8;font-size:.78rem;flex:none}
+.tabs button[aria-selected=true]{color:#0d1625;border-color:var(--gold)}
+.tabs button[aria-selected=true]::before{background:#0d1625;color:#fff}
+.tabs button.done::before{content:"\2713";background:var(--gold);color:#0d1625}
+.tabs button:disabled{cursor:default;opacity:.6}
+.stp{flex:1;display:flex;flex-direction:column;gap:1rem}
+.stp h3{font-size:1.35rem;color:#0d1625}
+.stp .sub{margin:-.6rem 0 0;color:var(--b-soft);font-size:.95rem}
+.hs{position:relative;background:linear-gradient(to top,#cfe3c6 0 12.6%,transparent 12.6%),linear-gradient(#e6f1fa,#f7fbfe 70%);border-radius:18px;border:1px solid var(--b-line);overflow:hidden}
+.hs svg{display:block;width:100%;height:auto;max-height:310px}
+.hs .pt{cursor:pointer}
+.hs .pt *{transition:fill .8s var(--ease),opacity .8s,stroke .3s}
+.hs .pt:hover .sh{stroke:#2f8fcf;stroke-width:3}
+.hs .grime{opacity:1}
+.hs .pt.on .grime{opacity:0}
+.hs .ck{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.4);transition:opacity .4s,transform .5s var(--ease)}
+.hs .pt.on .ck{opacity:1;transform:none}
+.hs .roof .sh{fill:#6e665a}.hs .roof.on .sh{fill:#34506f}
+.hs .side .sh{fill:#cdc6ae}.hs .side.on .sh{fill:#f6f9fc}
+.hs .side .ln{stroke:#b5ad93}.hs .side.on .ln{stroke:#dbe4ee}
+.hs .gut .sh{fill:#8d8471}.hs .gut.on .sh{fill:#ffffff}
+.hs .fen .sh{fill:#a99d80}.hs .fen.on .sh{fill:#efe4c9}
+.hs .drv .sh{fill:#8f8a80}.hs .drv.on .sh{fill:#d3dae2}
+.hs .hint{position:absolute;left:12px;top:12px;background:rgba(255,255,255,.92);border:1px solid var(--b-line);border-radius:999px;padding:.35rem .8rem;font-size:.8rem;font-weight:700;color:#0d1625}
+.svc{display:flex;flex-wrap:wrap;gap:.45rem}
+.svc button,.win button,.cf button{min-height:46px;padding:0 1rem;border-radius:999px;border:1.5px solid var(--b-line);background:#fff;color:#0d1625;font-weight:700;font-size:.9rem;cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+.svc button:hover,.win button:hover,.cf button:hover{border-color:#0d1625}
+.svc button[aria-pressed=true],.win button[aria-pressed=true],.cf button[aria-pressed=true]{background:#0d1625;border-color:#0d1625;color:#fff}
+.days2{display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem}
+.days2 button{min-height:76px;border-radius:16px;border:1.5px solid var(--b-line);background:#fff;color:#0d1625;cursor:pointer;display:grid;place-items:center;align-content:center;gap:.1rem;line-height:1.1;transition:transform .25s var(--ease),border-color .25s,background .25s}
+.days2 button small{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--b-soft)}
+.days2 button b{font-size:1.45rem}
+.days2 button span{font-size:.7rem;color:var(--b-soft)}
+.days2 button:hover{transform:translateY(-2px);border-color:#0d1625}
+.days2 button[aria-pressed=true]{background:#0d1625;border-color:#0d1625;color:#fff}
+.days2 button[aria-pressed=true] small,.days2 button[aria-pressed=true] span{color:#c9d3e2}
+@media(max-width:560px){.days2{grid-template-columns:repeat(4,1fr)}}
+.win{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.win button{border-radius:16px;min-height:64px;display:grid;align-content:center;gap:.1rem}
+.win button span{font-size:.76rem;font-weight:500;opacity:.75}
+.note{font-size:.84rem;color:var(--b-soft);margin:0}
+.fx{display:grid;gap:.9rem}
+.fx .two{display:grid;gap:.9rem}@media(min-width:560px){.fx .two{grid-template-columns:1fr 1fr}}
+.fx label{display:grid;gap:.3rem;font-size:.85rem;font-weight:700;color:#0d1625}
+.fx input,.fx textarea{min-height:50px;border:1.5px solid var(--b-line);border-radius:12px;padding:.6rem .9rem;background:#fff;color:#0d1625}
+.fx textarea{min-height:84px;resize:vertical}
+.fx input:focus,.fx textarea:focus{border-color:#0d1625;outline:none;box-shadow:0 0 0 3px rgba(47,143,207,.25)}
+.cf{display:flex;gap:.45rem}
+.nav2{display:flex;justify-content:space-between;align-items:center;gap:.8rem;margin-top:auto;padding-top:1.2rem;border-top:1px solid var(--b-line)}
+.nav2 .msg{font-size:.86rem;color:#b3261e;margin:0;flex:1}
+.bw .btn.ghost{color:#0d1625;box-shadow:inset 0 0 0 1.5px var(--b-line)}
+.bw .btn.ghost:hover{box-shadow:inset 0 0 0 1.5px #0d1625}
+.bw .err{color:#b3261e;font-size:.8rem;font-weight:600}
+/* ticket */
+.tk{position:relative;background:#fff;border:1px solid var(--b-line);border-radius:24px;padding:1.6rem 1.5rem;display:flex;flex-direction:column;gap:1rem}
+.tk::before{content:"";position:absolute;left:1.5rem;right:1.5rem;top:5.4rem;border-top:2px dashed var(--b-line)}
+.tk .hd2{display:flex;justify-content:space-between;align-items:flex-start;gap:.8rem;min-height:3.8rem}
+.tk .hd2 b{font:700 1.6rem/1 var(--serif);color:#0d1625;display:block}
+.tk .hd2 small{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--b-soft);font-weight:700}
+.tk .no{font-size:.78rem;font-weight:700;color:#9a7424;background:#fbf3df;border-radius:8px;padding:.3rem .6rem;white-space:nowrap}
+.tk dl{margin:.6rem 0 0;display:grid;gap:0}
+.tk dl div{display:grid;grid-template-columns:5.8rem 1fr;gap:.6rem;padding:.8rem 0;border-bottom:1px solid #eef2f6}
+.tk dt{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--b-soft);font-weight:700;padding-top:.15rem}
+.tk dd{margin:0;font-weight:700;color:#0d1625;font-size:.96rem}
+.tk dd.e{color:#9aa6ba;font-weight:500}
+.tk dd ul{list-style:none;margin:0;padding:0;display:grid;gap:.2rem}
+.tk dd li::before{content:"\2713  ";color:var(--b-sky)}
+.tk .meter{margin-top:auto}
+.tk .meter span{display:flex;justify-content:space-between;font-size:.8rem;color:var(--b-soft);font-weight:700;margin-bottom:.4rem}
+.tk .meter i{display:block;height:8px;border-radius:8px;background:#eef2f6;overflow:hidden}
+.tk .meter i b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--b-sky),#7fd3ff);border-radius:8px;transition:width .6s var(--ease)}
+.tk .demo{font-size:.8rem;color:var(--b-soft);margin:0}
+.okp{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:1rem}
+.okp h3{font-size:2rem;color:#0d1625}
+.okp p{margin:0;color:var(--b-soft);max-width:44ch}
 footer{border-top:1px solid var(--line);padding-block:2.4rem;color:var(--soft);font-size:.9rem}
 footer .r{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
 footer a{color:var(--gold2);display:inline-flex;min-height:44px;align-items:center}
@@ -204,31 +290,70 @@ footer .dis{border-top:1px solid var(--line);margin-top:1rem;padding-top:1rem;fo
  </div>
 </div></section>
 
-<section class="sec book" id="book" tabindex="-1" style="background:var(--navy2);border-top:1px solid var(--line)"><div class="wrap g">
- <div>
-  <span class="k">Book online</span>
-  <h2 class="rv" style="font-size:clamp(2.2rem,5vw,3.6rem);margin-top:.8rem">Pick your wash date in under a minute.</h2>
-  <p class="rv" style="--d:1;color:var(--soft);max-width:40ch;margin-top:1rem">Choose the service, the day and the time. You get a text to confirm, and the crew shows up.</p>
-  <span class="addon">Add-on shown: online booking</span>
-  <div class="ct"><small>Or call or text</small><a href="tel:+15167883963">516-788-3963</a><small>Seaford, NY &middot; serving the South Shore of Nassau County</small></div>
+<section class="sec bw" id="book" tabindex="-1"><div class="wrap">
+ <div class="top">
+  <div><span class="k">Book online &middot; sample add-on</span><h2 class="rv">Tap what needs a wash. Pick a day. Done.</h2></div>
+  <div><p class="rv" style="--d:1">Build your job on the house, choose a day and an arrival window, and Hov Bros confirms the exact time with you.</p><div class="call"><span>Rather talk?</span><a href="tel:+15167883963">516-788-3963</a><span>Seaford &middot; South Shore of Nassau</span></div></div>
  </div>
- <div class="card rv" style="--d:1"><div class="bk" id="bk" data-slots="8:00 AM,10:00 AM,12:00 PM,2:00 PM,4:00 PM">
- <div class="bkmain">
-  <label>What do you need?<select id="bkSvc"><option>House wash</option><option>Roof soft wash</option><option>Driveway & walkways</option><option>Deck or fence</option><option>Gutter cleaning</option><option>Handyman job</option></select></label>
-  <div><h4>1. Pick a day</h4><div class="days"></div></div>
-  <div><h4>2. Pick a time</h4><div class="slots"></div></div>
-  <p class="sum" aria-live="polite"></p>
-  <form novalidate>
-   <div class="two"><label>Name<input autocomplete="name" required><span class="err" hidden>Please enter your name.</span></label>
-   <label>Phone<input type="tel" inputmode="tel" autocomplete="tel" required><span class="err" hidden>Please enter a phone number.</span></label></div>
-   <label style="margin-top:.8rem">Street address<input autocomplete="street-address"></label>
-   <p class="err bkerr" hidden></p>
-   <button class="btn" type="submit" style="margin-top:1rem">Book my wash</button>
-   <p class="demo-note"><b>Demo booking.</b> This is a website concept. Nothing is sent or saved, and no wash is booked.</p>
-  </form>
+ <div class="bwg">
+  <div class="pane rv" id="bkPane">
+   <div class="tabs" role="tablist" aria-label="Booking steps">
+    <button type="button" role="tab" id="tb0" aria-selected="true" aria-controls="st0">The job</button>
+    <button type="button" role="tab" id="tb1" aria-selected="false" aria-controls="st1" disabled>The day</button>
+    <button type="button" role="tab" id="tb2" aria-selected="false" aria-controls="st2" disabled>Your details</button>
+   </div>
+   <div class="stp" id="st0" role="tabpanel" aria-labelledby="tb0">
+    <h3>What should we wash?</h3>
+    <p class="sub">Tap the house or the list. Each part you pick gets cleaned up in the picture.</p>
+    <div class="hs"><span class="hint" id="hint">Tap the roof to start</span>
+     <svg viewBox="0 0 560 300" aria-hidden="true">
+      <rect x="0" y="262" width="560" height="38" fill="#cfe3c6"/>
+      <g class="pt drv" data-s="2"><polygon class="sh" points="392,262 486,262 560,300 360,300" stroke="#fff" stroke-width="0"/><g class="grime"><path d="M410 272 l40 0 M380 290 l70 0 M470 282 l40 4" stroke="#6e695f" stroke-width="5" stroke-linecap="round" opacity=".55"/></g><g class="ck"><circle cx="470" cy="281" r="12" fill="#2f8fcf"/><path d="M464 281l4 4 8-8" stroke="#fff" stroke-width="3" fill="none"/></g></g>
+      <g class="pt fen" data-s="3"><g class="sh-g"><rect class="sh" x="18" y="196" width="110" height="10" rx="2"/><rect class="sh" x="18" y="232" width="110" height="10" rx="2"/><rect class="sh" x="22" y="180" width="14" height="82" rx="3"/><rect class="sh" x="44" y="180" width="14" height="82" rx="3"/><rect class="sh" x="66" y="180" width="14" height="82" rx="3"/><rect class="sh" x="88" y="180" width="14" height="82" rx="3"/><rect class="sh" x="110" y="180" width="14" height="82" rx="3"/></g><g class="grime"><path d="M26 200 v40 M70 210 v36 M114 196 v50" stroke="#6f6550" stroke-width="5" stroke-linecap="round" opacity=".45"/></g><g class="ck"><circle cx="73" cy="164" r="12" fill="#2f8fcf"/><path d="M67 164l4 4 8-8" stroke="#fff" stroke-width="3" fill="none"/></g></g>
+      <g class="pt side" data-s="0"><rect class="sh" x="150" y="132" width="250" height="130"/><g class="lns"><path class="ln" d="M150 146h250M150 160h250M150 174h250M150 188h250M150 202h250M150 216h250M150 230h250M150 244h250" stroke-width="1.5"/></g><g class="grime"><path d="M170 140 v50 M232 136 v34 M380 140 v60 M300 200 v40" stroke="#8c836a" stroke-width="7" stroke-linecap="round" opacity=".45"/></g>
+       <rect x="176" y="160" width="46" height="40" fill="#bcd6ea" stroke="#fff" stroke-width="4"/><rect x="330" y="160" width="46" height="40" fill="#bcd6ea" stroke="#fff" stroke-width="4"/><rect x="252" y="186" width="46" height="76" fill="#34506f"/><circle cx="290" cy="226" r="2.5" fill="#d9b35b"/>
+       <g class="ck"><circle cx="275" cy="150" r="12" fill="#2f8fcf"/><path d="M269 150l4 4 8-8" stroke="#fff" stroke-width="3" fill="none"/></g></g>
+      <g class="pt roof" data-s="1"><polygon class="sh" points="128,136 275,40 422,136"/><g class="grime"><path d="M200 100 l-10 26 M262 62 l-6 50 M320 80 l8 40 M370 108 l4 18" stroke="#3d382f" stroke-width="8" stroke-linecap="round" opacity=".5"/></g><g class="ck"><circle cx="275" cy="96" r="13" fill="#2f8fcf"/><path d="M268 96l5 5 9-9" stroke="#fff" stroke-width="3" fill="none"/></g></g>
+      <g class="pt gut" data-s="4"><rect class="sh" x="124" y="134" width="302" height="9" rx="2" stroke="#7a705c" stroke-width="1"/><rect class="sh" x="406" y="140" width="9" height="122" rx="2" stroke="#7a705c" stroke-width="1"/><g class="ck"><circle cx="426" cy="128" r="11" fill="#2f8fcf"/><path d="M420 128l4 4 8-8" stroke="#fff" stroke-width="3" fill="none"/></g></g>
+     </svg>
+    </div>
+    <div class="svc" id="svc" role="group" aria-label="Services">
+     <button type="button" aria-pressed="false" data-s="0">House wash</button><button type="button" aria-pressed="false" data-s="1">Roof soft wash</button><button type="button" aria-pressed="false" data-s="2">Driveway &amp; walkways</button><button type="button" aria-pressed="false" data-s="3">Deck or fence</button><button type="button" aria-pressed="false" data-s="4">Gutter cleaning</button><button type="button" aria-pressed="false" data-s="5">Handyman job</button>
+    </div>
+   </div>
+   <div class="stp" id="st1" role="tabpanel" aria-labelledby="tb1" hidden>
+    <h3>Which day works?</h3>
+    <p class="sub">Pick a day and when you'd like the crew to arrive.</p>
+    <div class="days2" id="days2"></div>
+    <h3 style="font-size:1.05rem;margin-top:.4rem">Arrival window</h3>
+    <div class="win" id="win" role="group" aria-label="Arrival window"><button type="button" aria-pressed="false" data-w="Morning">Morning<span>Early start</span></button><button type="button" aria-pressed="false" data-w="Midday">Midday<span>Around lunch</span></button><button type="button" aria-pressed="false" data-w="Afternoon">Afternoon<span>Later in the day</span></button></div>
+    <p class="note">Hov Bros texts or calls to confirm the exact arrival time.</p>
+   </div>
+   <div class="stp" id="st2" role="tabpanel" aria-labelledby="tb2" hidden>
+    <h3>Where's the job?</h3>
+    <div class="fx">
+     <div class="two"><label>Name<input id="bN" autocomplete="name"><span class="err" hidden>Please enter your name.</span></label><label>Phone<input id="bP" type="tel" autocomplete="tel"><span class="err" hidden>Please enter a phone number.</span></label></div>
+     <label>Street and town<input id="bA" autocomplete="street-address" placeholder="e.g. Seaford"></label>
+     <div><span style="font-size:.85rem;font-weight:700">Confirm with me by</span><div class="cf" id="cf" role="group" aria-label="Confirm by" style="margin-top:.4rem"><button type="button" aria-pressed="true" data-c="Text">Text</button><button type="button" aria-pressed="false" data-c="Phone call">Phone call</button></div></div>
+     <label>Anything we should know?<textarea id="bT" placeholder="Gate code, pets, stains you're worried about"></textarea></label>
+    </div>
+   </div>
+   <div class="okp" id="bkOk" hidden tabindex="-1"><h3>Request ready.</h3><p id="okTxt"></p><p><b>Demo only.</b> Nothing was sent or saved. On the real site this goes straight to Hov Bros.</p><button class="btn ghost" type="button" id="bkAgain">Start over</button></div>
+   <div class="nav2" id="nav2"><button class="btn ghost" type="button" id="bkBack" hidden>Back</button><p class="msg" id="bkMsg" aria-live="polite"></p><button class="btn" type="button" id="bkNext">Next: pick a day</button></div>
+  </div>
+  <aside class="tk rv" style="--d:1" aria-label="Your work order">
+   <div class="hd2"><div><small>Work order</small><b>Hov Bros</b></div><span class="no" id="tkNo">HB-0000</span></div>
+   <dl>
+    <div><dt>Services</dt><dd id="tS" class="e">Tap the house to add</dd></div>
+    <div><dt>Day</dt><dd id="tD" class="e">Not picked yet</dd></div>
+    <div><dt>Arrival</dt><dd id="tW" class="e">Not picked yet</dd></div>
+    <div><dt>Where</dt><dd id="tA" class="e">Not added yet</dd></div>
+    <div><dt>Confirm by</dt><dd id="tC">Text</dd></div>
+   </dl>
+   <div class="meter"><span><span>Your request</span><span id="tP">0%</span></span><i><b id="tBar"></b></i></div>
+   <p class="demo">Sample booking. Nothing is sent, saved or charged.</p>
+  </aside>
  </div>
- <div id="bkOk" hidden tabindex="-1"><h3 style="margin:0 0 .4rem">Demo complete.</h3><p id="bkWhen" style="font-weight:700"></p><p>On the real site this booking would go straight to the owner's calendar and send you a text to confirm. Nothing was sent or saved.</p><button class="btn ghost" type="button" id="bkAgain">Start over</button></div>
-</div></div>
 </div></section>
 </main>
 <footer><div class="wrap">
@@ -288,6 +413,7 @@ var adm=$("#adm");
 if(adm){var pk=null;var gal=d.getElementById(adm.getAttribute("data-gal"));
   adm.addEventListener("click",function(e){var b=e.target.closest(".pick button");if(b){$$(".pick button",adm).forEach(function(o){o.setAttribute("aria-pressed",o===b)});pk=b;}});
   $("#admPub").addEventListener("click",function(){var ti=$("#admTitle"),er=$("#admErr");if(!pk||!ti.value.trim()){er.hidden=false;er.textContent=!pk?"Pick a photo first.":"Give the project a name.";return;}er.hidden=true;var tpl=gal.querySelector("[data-tpl]")||gal.firstElementChild;var n=tpl.cloneNode(true);n.removeAttribute("data-tpl");n.hidden=false;var im=n.querySelector("img");im.src=pk.querySelector("img").src;im.alt=ti.value.trim();im.setAttribute("data-cap",ti.value.trim());var cap=n.querySelector("[data-capt]");if(cap)cap.textContent=ti.value.trim();var nw=n.querySelector("[data-new]");if(nw)nw.hidden=false;n.classList.add("in");gal.insertBefore(n,gal.firstChild);n.classList.add("flash");ti.value="";$("#admOk").hidden=false;setTimeout(function(){go(gal.id)},200);});
+  var uf=$("#admFile");if(uf)uf.addEventListener("change",function(){var f=uf.files&&uf.files[0];if(!f||!/^image\//.test(f.type))return;var b=d.createElement("button");b.type="button";b.setAttribute("aria-label","Use your uploaded photo");var im=d.createElement("img");im.alt="";im.src=URL.createObjectURL(f);b.appendChild(im);var up=uf.closest(".up");up.parentNode.insertBefore(b,up);$$(".pick button",adm).forEach(function(o){o.setAttribute("aria-pressed",o===b)});pk=b;uf.value="";});
   var nt=$("#admNotice");if(nt)nt.addEventListener("input",function(){$$("[data-notice]").forEach(function(x){x.textContent=nt.value||x.getAttribute("data-notice")})});}
 /* review feed demo */
 var rf=$("#rfeed");
@@ -297,6 +423,43 @@ if(rf&&!RM){var cards=$$(".rc",rf),k=0;setInterval(function(){var c=cards[k%card
 (function(){var S=window.__site;var dr=document.getElementById("drops");if(!S.RM){for(var i=0;i<18;i++){var e=document.createElement("i");e.style.left=(Math.random()*100)+"%";e.style.animationDuration=(1.6+Math.random()*1.8)+"s";e.style.animationDelay=(-Math.random()*3)+"s";dr.appendChild(e);}}
 var w=document.getElementById("wash"),c=document.getElementById("clean"),j=document.getElementById("jet");
 S.onTick=function(vh){var r=w.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;var k=S.RM?1:Math.max(0,Math.min(1,(vh-r.top-r.height*.2)/(vh*.8)));c.style.clipPath="inset(0 "+((1-k)*100).toFixed(1)+"% 0 0)";j.style.left=(k*100)+"%";j.style.opacity=(k>0&&k<1)?1:0;};S.tick();})();
+
+(function(){var S=window.__site,$=S.$,$$=S.$$,d=document;
+var SV=["House wash","Roof soft wash","Driveway & walkways","Deck or fence","Gutter cleaning","Handyman job"];
+var sel=[],day=null,win=null,step=0,cf="Text",N=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],M=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var base=new Date();base.setHours(0,0,0,0);var days=[];for(var i=1;days.length<12;i++){var x=new Date(base);x.setDate(base.getDate()+i);if(x.getDay()!==0)days.push(x);}
+$("#tkNo").textContent="HB-"+String(base.getMonth()+1).padStart(2,"0")+String(base.getDate()).padStart(2,"0");
+$("#days2").innerHTML=days.map(function(x,i){return '<button type="button" aria-pressed="false" data-i="'+i+'" aria-label="'+N[x.getDay()]+' '+M[x.getMonth()]+' '+x.getDate()+'"><small>'+N[x.getDay()]+'</small><b>'+x.getDate()+'</b><span>'+M[x.getMonth()]+'</span></button>'}).join("");
+function toggle(i){var k=sel.indexOf(i);if(k>-1)sel.splice(k,1);else sel.push(i);sel.sort();
+ $$("#svc button").forEach(function(b){b.setAttribute("aria-pressed",sel.indexOf(+b.getAttribute("data-s"))>-1)});
+ $$(".hs .pt").forEach(function(g){g.classList.toggle("on",sel.indexOf(+g.getAttribute("data-s"))>-1)});
+ $("#hint").textContent=sel.length?sel.length+" picked. Tap more or press Next":"Tap the roof to start";upd();}
+$$("#svc button").forEach(function(b){b.addEventListener("click",function(){toggle(+b.getAttribute("data-s"))})});
+$$(".hs .pt").forEach(function(g){g.addEventListener("click",function(){toggle(+g.getAttribute("data-s"))})});
+$("#days2").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;day=+b.getAttribute("data-i");$$("#days2 button").forEach(function(o){o.setAttribute("aria-pressed",o===b)});upd();});
+$$("#win button").forEach(function(b){b.addEventListener("click",function(){win=b.getAttribute("data-w");$$("#win button").forEach(function(o){o.setAttribute("aria-pressed",o===b)});upd();})});
+$$("#cf button").forEach(function(b){b.addEventListener("click",function(){cf=b.getAttribute("data-c");$$("#cf button").forEach(function(o){o.setAttribute("aria-pressed",o===b)});upd();})});
+["#bN","#bP","#bA"].forEach(function(s){$(s).addEventListener("input",upd)});
+function set(el,v,empty){el.classList.toggle("e",!v);if(typeof v==="string"||!v)el.textContent=v||empty;}
+function upd(){var tS=$("#tS");if(sel.length){tS.classList.remove("e");tS.innerHTML="<ul>"+sel.map(function(i){return "<li>"+SV[i].replace("&","&amp;")+"</li>"}).join("")+"</ul>";}else set(tS,"","Tap the house to add");
+ set($("#tD"),day!==null?N[days[day].getDay()]+", "+M[days[day].getMonth()]+" "+days[day].getDate():"","Not picked yet");
+ set($("#tW"),win||"","Not picked yet");set($("#tA"),$("#bA").value.trim(),"Not added yet");$("#tC").textContent=cf;
+ var p=(sel.length?30:0)+(day!==null?20:0)+(win?15:0)+($("#bN").value.trim()?12:0)+($("#bP").value.trim()?13:0)+($("#bA").value.trim()?10:0);
+ $("#tP").textContent=p+"%";$("#tBar").style.width=p+"%";$("#bkMsg").textContent="";}
+var LBL=["Next: pick a day","Next: your details","Request this date"];
+function show(n){step=n;[0,1,2].forEach(function(k){$("#st"+k).hidden=k!==n;var t=$("#tb"+k);t.setAttribute("aria-selected",k===n);t.classList.toggle("done",k<n);if(k<=n)t.disabled=false;});
+ $("#bkBack").hidden=n===0;$("#bkNext").textContent=LBL[n];$("#bkMsg").textContent="";}
+$$(".tabs button").forEach(function(t,k){t.addEventListener("click",function(){if(!t.disabled&&k<=maxOk())show(k)})});
+function maxOk(){return !sel.length?0:(day===null||!win)?1:2}
+$("#bkBack").addEventListener("click",function(){show(step-1)});
+$("#bkNext").addEventListener("click",function(){
+ if(step===0){if(!sel.length){$("#bkMsg").textContent="Pick at least one service.";return;}show(1);return;}
+ if(step===1){if(day===null||!win){$("#bkMsg").textContent=day===null?"Pick a day.":"Pick an arrival window.";return;}show(2);$("#bN").focus();return;}
+ var bad=null;[["#bN"],["#bP"]].forEach(function(s){var i=$(s[0]),ok=!!i.value.trim();i.parentNode.querySelector(".err").hidden=ok;i.setAttribute("aria-invalid",!ok);if(!ok&&!bad)bad=i;});if(bad){bad.focus();return;}
+ $("#okTxt").textContent=sel.map(function(i){return SV[i]}).join(", ")+" on "+$("#tD").textContent+", "+win.toLowerCase()+" arrival. Hov Bros would confirm by "+cf.toLowerCase()+".";
+ [0,1,2].forEach(function(k){$("#st"+k).hidden=true;$("#tb"+k).classList.add("done");$("#tb"+k).setAttribute("aria-selected","false")});$("#nav2").hidden=true;$("#bkOk").hidden=false;$("#bkOk").focus();$("#tP").textContent="100%";$("#tBar").style.width="100%";});
+$("#bkAgain").addEventListener("click",function(){sel=[];day=null;win=null;cf="Text";$$("#bkPane [aria-pressed]").forEach(function(b){b.setAttribute("aria-pressed","false")});$('#cf button[data-c="Text"]').setAttribute("aria-pressed","true");$$(".hs .pt").forEach(function(g){g.classList.remove("on")});["#bN","#bP","#bA","#bT"].forEach(function(s){$(s).value=""});$("#bkOk").hidden=true;$("#nav2").hidden=false;[1,2].forEach(function(k){$("#tb"+k).disabled=true});$("#hint").textContent="Tap the roof to start";show(0);upd();});
+upd();})();
 </script>
 </body>
 </html>
